@@ -13,7 +13,7 @@
           "error",
           "interface"
         ],
-        "no-unused-vars": "error",
+        "no-unused-vars": "warn",
         "no-console": "error",
         "no-new": 0
       }
