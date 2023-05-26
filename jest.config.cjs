@@ -10,5 +10,6 @@ module.exports = {
     "src/server/index.ts",
     "!src/server/routers/**/*",
     "!src/loadEnviroment.ts",
+    "!src/database/connectToDatabase.ts",
   ],
 };
