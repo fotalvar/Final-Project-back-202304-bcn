@@ -4,17 +4,16 @@ export interface PathStructure {
   pingController: string;
 }
 
-export interface UserCredentials {
+export interface UserStructure {
   username: string;
   password: string;
 }
 
-export interface UserData extends UserCredentials {
+export type UserCredencialAlias = Request<
+  Record<string, unknown>,
+  Record<string, unknown>,
+  { username: string; password: string }
+>;
+export interface UserData extends UserStructure {
   _id: string;
 }
-
-export type UserCredentialsRequest = Request<
-  Record<string, unknown>,
-  Record<string, unknown>,
-  UserCredentials
->;
