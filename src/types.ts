@@ -11,10 +11,10 @@ export type UserCredencialAlias = Request<
   { username: string; password: string }
 >;
 
-export interface UserStructure {
+export interface UserCredentials {
   username: string;
   password: string;
 }
-export interface UserData extends UserStructure {
+export interface UserDataCredentials extends UserCredentials {
   _id: string;
 }

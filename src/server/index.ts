@@ -26,9 +26,9 @@ app.disable("x-powered-by");
 
 app.use(morgan("dev"));
 
-app.post(path.user, userRouter);
-
 app.get(path.pingController, pingController);
+
+app.use(path.user, userRouter);
 
 app.use(notFoundError);
 

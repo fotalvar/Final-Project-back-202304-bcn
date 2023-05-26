@@ -2,8 +2,8 @@ import { type NextFunction, type Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import {
-  type UserStructure,
-  type UserData,
+  type UserCredentials,
+  type UserDataCredentials,
   type UserCredencialAlias,
 } from "../../../types";
 import { Types } from "mongoose";
@@ -16,7 +16,7 @@ beforeEach(() => {
 });
 
 describe("Given a loginUser controller", () => {
-  const usersCredentials: UserStructure = {
+  const usersCredentials: UserCredentials = {
     password: "hola",
     username: "fede",
   };
@@ -29,7 +29,7 @@ describe("Given a loginUser controller", () => {
   };
   const next = jest.fn();
 
-  const mockedUser: UserData = {
+  const mockedUser: UserDataCredentials = {
     _id: new Types.ObjectId().toString(),
     password: "hola",
     username: "fede",
