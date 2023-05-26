@@ -9,13 +9,19 @@
       "extends": ["xo-typescript", "prettier"],
       "files": ["*.ts"],
       "rules": {
+        "no-console": "error",
+        "no-unused-vars": "warn",
         "@typescript-eslint/consistent-type-definitions": [
           "error",
           "interface"
         ],
-        "no-unused-vars": "warn",
-        "no-console": "error",
-        "no-new": 0
+        "@typescript-eslint/naming-convention": "off",
+        "new-cap": [
+          "error",
+          {
+            "capIsNewExceptions": ["Router"]
+          }
+        ]
       }
     }
   ],
