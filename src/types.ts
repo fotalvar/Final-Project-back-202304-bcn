@@ -3,7 +3,6 @@ import { type Request } from "express";
 export interface PathStructure {
   pingController: string;
 }
-
 export interface UserStructure {
   username: string;
   password: string;
