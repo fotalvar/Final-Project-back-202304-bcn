@@ -7,9 +7,9 @@ import {
   type UserCredencialAlias,
 } from "../../../types";
 import { Types } from "mongoose";
-import User from "../../../database/models/User.js";
-import { loginUser } from "./usersController.js";
-import { responseErrorData } from "../../../utils/responseUtils.js";
+import User from "../../../database/models/User";
+import { loginUser } from "./userController";
+import { responseErrorData } from "../../../utils/responseUtils";
 
 beforeEach(() => {
   jest.clearAllMocks();
