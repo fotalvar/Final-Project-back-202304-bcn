@@ -3,6 +3,7 @@ import { type Request } from "express";
 export interface PathStructure {
   pingController: string;
   login: string;
+  user: string;
 }
 export type UserCredencialAlias = Request<
   Record<string, unknown>,
