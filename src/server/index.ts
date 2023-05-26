@@ -1,9 +1,16 @@
 import "../loadEnviroment.js";
+import { validate } from "express-validation";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import pingController from "./controllers/pingController/pingController.js";
 import path from "../paths.js";
+import {
+  generalError,
+  notFoundError,
+} from "./middlewares/errorMiddlewares/errorMiddlewares.js";
+import loginSchema from "../schemas/loginSchema.js";
+import { loginUser } from "./controllers/userController/userController.js";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS;
 
@@ -13,14 +20,24 @@ const corsOptions: cors.CorsOptions = {
 
 const app = express();
 
-app.disable("x-powered-by");
-
 app.use(cors(corsOptions));
-
-app.use(morgan("dev"));
 
 app.use(express.json());
 
+app.disable("x-powered-by");
+
+app.use(morgan("dev"));
+
+app.post(
+  path.login,
+  validate(loginSchema, {}, { abortEarly: false }),
+  loginUser
+);
+
 app.get(path.pingController, pingController);
+
+app.use(notFoundError);
+
+app.use(generalError);
 
 export default app;
