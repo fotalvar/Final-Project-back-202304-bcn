@@ -1,8 +1,8 @@
 import { Joi } from "express-validation";
-import { type UserStructure } from "../types";
+import { type UserCredentials } from "../types";
 
 const loginSchema = {
-  body: Joi.object<UserStructure>({
+  body: Joi.object<UserCredentials>({
     username: Joi.string().required(),
     password: Joi.string().required(),
   }),

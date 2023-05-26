@@ -1,5 +1,4 @@
 import "../loadEnviroment.js";
-import { validate } from "express-validation";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -9,8 +8,7 @@ import {
   generalError,
   notFoundError,
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
-import loginSchema from "../schemas/loginSchema.js";
-import { loginUser } from "./controllers/userController/userController.js";
+import userRouter from "./routers/userRouter.js";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS;
 
@@ -28,13 +26,9 @@ app.disable("x-powered-by");
 
 app.use(morgan("dev"));
 
-app.post(
-  path.login,
-  validate(loginSchema, {}, { abortEarly: false }),
-  loginUser
-);
-
 app.get(path.pingController, pingController);
+
+app.use(path.user, userRouter);
 
 app.use(notFoundError);
 
