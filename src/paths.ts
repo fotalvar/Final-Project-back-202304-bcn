@@ -1,7 +1,7 @@
 import { type PathStructure } from "./types";
 
 const path: PathStructure = {
-  pingController: "/",
+  pingController: "/ping",
   login: "/login",
   user: "/user",
 };
