@@ -7,7 +7,7 @@ describe("Given a GET '/' endpoint", () => {
       const expectedStatus = 200;
       const message = "Pong";
 
-      const response = await request(app).get("/").expect(expectedStatus);
+      const response = await request(app).get("/ping").expect(expectedStatus);
 
       expect(response.body).toStrictEqual({ message });
     });
