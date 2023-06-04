@@ -10,7 +10,7 @@ import {
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
 import userRouter from "./routers/userRouter.js";
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS;
+const allowedOrigins = [process.env.LOCAL_ORIGIN!, process.env.REMOTE_ORIGIN!];
 
 const corsOptions: cors.CorsOptions = {
   origin: allowedOrigins,
