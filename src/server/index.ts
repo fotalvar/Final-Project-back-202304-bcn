@@ -9,6 +9,7 @@ import {
   notFoundError,
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
 import userRouter from "./routers/userRouter.js";
+import teamRouter from "./routers/team/teamRouter.js";
 
 const allowedOrigins = [process.env.LOCAL_ORIGIN!, process.env.REMOTE_ORIGIN!];
 
@@ -29,6 +30,8 @@ app.use(morgan("dev"));
 app.get(path.pingController, pingController);
 
 app.use(path.user, userRouter);
+
+app.use(path.teams, teamRouter);
 
 app.use(notFoundError);
 

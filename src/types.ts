@@ -1,9 +1,11 @@
 import { type Request } from "express";
 
 export interface PathStructure {
+  root: string;
   pingController: string;
   login: string;
   user: string;
+  teams: string;
 }
 export type UserCredencialAlias = Request<
   Record<string, unknown>,
@@ -17,4 +19,16 @@ export interface UserCredentials {
 }
 export interface UserDataCredentials extends UserCredentials {
   _id: string;
+}
+export interface TeamsStructure {
+  id?: string;
+  name: string;
+  description: string;
+  character1: string;
+  character2: string;
+  character3: string;
+  character4: string;
+  rating: string;
+  type: string;
+  bgimage: string;
 }

@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
-import Team from "../../../schemas/teamsSchema";
-import { statusCode } from "../../../utils/responseUtils";
+import Team from "../../../schemas/teamsSchema.js";
+import { statusCode } from "../../../utils/responseUtils.js";
 
 const getTeams = async (req: Request, res: Response, next: NextFunction) => {
   try {
