@@ -4,6 +4,7 @@ export interface PathStructure {
   pingController: string;
   login: string;
   user: string;
+  teams: string;
 }
 export type UserCredencialAlias = Request<
   Record<string, unknown>,
