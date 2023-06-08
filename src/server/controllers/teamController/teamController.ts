@@ -12,4 +12,20 @@ const getTeams = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+export const deleteTeam = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { teamId } = req.params;
+
+    await Team.findByIdAndDelete(teamId).exec();
+
+    res.status(statusCode.ok).json("Team deleted");
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
 export default getTeams;
