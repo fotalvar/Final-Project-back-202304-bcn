@@ -9,6 +9,6 @@ const teamRouter = Router();
 
 teamRouter.get(path.root, auth, getTeams);
 
-teamRouter.delete(path.id, auth, deleteTeam);
+teamRouter.delete(path.delete, auth, deleteTeam);
 
 export default teamRouter;
