@@ -122,25 +122,25 @@ describe("Given a deleteTeam controller", () => {
       expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
-});
 
-describe("Given a AddTeam controller", () => {
-  describe("When it receives a request with a new team", () => {
-    test("Then it should call the response's status method with the statuscode 201", async () => {
-      Team.create = jest.fn().mockReturnValue(mockedTeam[0]);
-      const expectedStatusCode = 201;
-      const req: Pick<TeamStructureRequest, "body" | "id"> = {
-        body: mockedTeam[0],
-        id: "647cd44b96ddfdfe6857e5e0",
-      };
+  describe("Given a AddTeam controller", () => {
+    describe("When it receives a request with a new team", () => {
+      test("Then it should call the response's status method with the statuscode 201", async () => {
+        Team.create = jest.fn().mockReturnValue(mockedTeam[0]);
+        const expectedStatusCode = 201;
+        const req: Pick<TeamStructureRequest, "body" | "id"> = {
+          body: mockedTeam[0],
+          id: "647cd44b96ddfdfe6857e5e0",
+        };
 
-      await addTeam(
-        req as TeamStructureRequest,
-        res as Response,
-        next as NextFunction
-      );
+        await addTeam(
+          req as TeamStructureRequest,
+          res as Response,
+          next as NextFunction
+        );
 
-      expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
+        expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
+      });
     });
   });
 });
