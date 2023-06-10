@@ -33,3 +33,8 @@ export interface TeamsStructure {
   type: string;
   bgimage: string;
 }
+
+export interface TeamStructureRequest extends Request {
+  body: TeamsStructure;
+  id: string;
+}

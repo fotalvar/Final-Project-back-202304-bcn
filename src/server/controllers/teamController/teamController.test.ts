@@ -1,10 +1,11 @@
 import Team from "../../../schemas/teamsSchema";
 import { type Request, type NextFunction, type Response } from "express";
 import { type CustomRequest } from "../../middlewares/authMiddlewares/types";
-import getTeams, { deleteTeam } from "./teamController";
+import getTeams, { addTeam, deleteTeam } from "./teamController";
 import { mockedTeam } from "../../mocks/mocks";
 import { correctResponse } from "../../../utils/responseUtils";
 import { Types } from "mongoose";
+import { type TeamStructureRequest } from "../../../types";
 
 type CustomResponse = Pick<Response, "status" | "json">;
 
@@ -12,14 +13,14 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Given a getTeams controller", () => {
-  const req = {};
-  const res: Partial<Response> = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  };
-  const next = jest.fn();
+const req = {};
+const res: Partial<Response> = {
+  status: jest.fn().mockReturnThis(),
+  json: jest.fn(),
+};
+const next = jest.fn();
 
+describe("Given a getTeams controller", () => {
   describe("When it receives a response", () => {
     Team.find = jest.fn().mockReturnValue({
       limit: jest.fn().mockReturnThis(),
@@ -119,6 +120,27 @@ describe("Given a deleteTeam controller", () => {
       await deleteTeam(req as Request, res as Response, next);
 
       expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+});
+
+describe("Given a AddTeam controller", () => {
+  describe("When it receives a request with a new team", () => {
+    test("Then it should call the response's status method with the statuscode 201", async () => {
+      Team.create = jest.fn().mockReturnValue(mockedTeam[0]);
+      const expectedStatusCode = 201;
+      const req: Pick<TeamStructureRequest, "body" | "id"> = {
+        body: mockedTeam[0],
+        id: "647cd44b96ddfdfe6857e5e0",
+      };
+
+      await addTeam(
+        req as TeamStructureRequest,
+        res as Response,
+        next as NextFunction
+      );
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
     });
   });
 });
