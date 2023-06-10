@@ -1,11 +1,10 @@
-import { type PathStructure } from "./types.js";
-
-const path: PathStructure = {
+const path = {
   root: "/",
   pingController: "/ping",
   login: "/login",
   user: "/user",
   teams: "/teams",
+  delete: "/delete/:id",
 };
 
 export default path;

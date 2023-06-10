@@ -1,9 +1,16 @@
 import Team from "../../../schemas/teamsSchema";
-import { type NextFunction, type Response } from "express";
+import { type Request, type NextFunction, type Response } from "express";
 import { type CustomRequest } from "../../middlewares/authMiddlewares/types";
-import getTeams from "./teamController";
+import getTeams, { deleteTeam } from "./teamController";
 import { mockedTeam } from "../../mocks/mocks";
 import { correctResponse } from "../../../utils/responseUtils";
+import { Types } from "mongoose";
+
+type CustomResponse = Pick<Response, "status" | "json">;
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Given a getTeams controller", () => {
   const req = {};
@@ -61,6 +68,55 @@ describe("Given a getTeams controller", () => {
         res as Response,
         next as NextFunction
       );
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+});
+
+describe("Given a deleteTeam controller", () => {
+  const teamId = new Types.ObjectId().toString();
+
+  const req: Partial<Request> = {
+    params: { teamId },
+  };
+
+  const res: CustomResponse = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+
+  const next = jest.fn();
+
+  describe("When it receives a request with an existing id, a response and next function", () => {
+    test("Then it should call its status method with a status 200 and the the message 'Team deleted'", async () => {
+      const expectedStatusCode = 200;
+      const expectedMessage = "Team deleted";
+
+      Team.findById = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue(teamId),
+      });
+
+      Team.findByIdAndDelete = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue(teamId),
+      });
+
+      await deleteTeam(req as Request, res as Response, next);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
+      expect(res.json).toHaveBeenCalledWith(expectedMessage);
+    });
+  });
+
+  describe("When it receives a request with an invalid id, a response and next function", () => {
+    test("Then it should call the next function with the error message 'Can't delete Team'", async () => {
+      const expectedError = new Error("Can't delete Team");
+
+      Team.findByIdAndDelete = jest.fn().mockReturnValue({
+        exec: jest.fn().mockRejectedValue(expectedError),
+      });
+
+      await deleteTeam(req as Request, res as Response, next);
 
       expect(next).toHaveBeenCalledWith(expectedError);
     });

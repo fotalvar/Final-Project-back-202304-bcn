@@ -6,6 +6,7 @@ export interface PathStructure {
   login: string;
   user: string;
   teams: string;
+  id: string;
 }
 export type UserCredencialAlias = Request<
   Record<string, unknown>,
