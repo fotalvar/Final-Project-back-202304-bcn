@@ -13,7 +13,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-const req = {};
+const req: Partial<CustomRequest> = { query: { limit: "3" } };
 const res: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
   json: jest.fn(),
@@ -52,7 +52,7 @@ describe("Given a getTeams controller", () => {
   describe("When it receives a next function and the exec method rejects with an 'Error connecting to database' error", () => {
     test("Then it should call next function with the error 'Error connecting to database'", async () => {
       const expectedError = new Error("Error connecting to database");
-      const req = {};
+      const req: Partial<CustomRequest> = { query: { limit: "3" } };
       const res: Partial<Response> = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
