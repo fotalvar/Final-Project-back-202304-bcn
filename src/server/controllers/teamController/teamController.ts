@@ -4,10 +4,18 @@ import { statusCode } from "../../../utils/responseUtils.js";
 import CustomError from "../../../CustomError/CustomError.js";
 import { type TeamStructureRequest } from "../../../types.js";
 import { Types } from "mongoose";
+import { type CustomRequest } from "../../middlewares/authMiddlewares/types.js";
 
-const getTeams = async (req: Request, res: Response, next: NextFunction) => {
+const getTeams = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const teams = await Team.find().limit(3).exec();
+    const { limit } = req.query;
+    const limitNumber = Number(limit);
+
+    const teams = await Team.find().limit(limitNumber).exec();
 
     res.status(statusCode.ok).json({ teams });
   } catch (error) {

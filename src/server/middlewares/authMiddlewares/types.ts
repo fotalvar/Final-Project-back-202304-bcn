@@ -18,7 +18,15 @@ export interface UserStructure extends UserCredentials {
 
 export interface CustomRequest extends Request {
   id: string;
+  query: {
+    limit?: string;
+  };
 }
+
+export interface CustomTestRequest extends Request {
+  id: string;
+}
+
 export interface CustomParamsRequest extends Request {
   user: string;
   params: { teamsId: string };
