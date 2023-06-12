@@ -15,7 +15,7 @@ const getTeams = async (
     const { limit } = req.query;
     const limitNumber = Number(limit);
 
-    const teams = await Team.find().limit(limitNumber).exec();
+    const teams = await Team.find().sort({ _id: -1 }).limit(limitNumber).exec();
 
     res.status(statusCode.ok).json({ teams });
   } catch (error) {

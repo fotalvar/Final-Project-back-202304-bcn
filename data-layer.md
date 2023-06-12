@@ -14,7 +14,7 @@
   - character4 -> string
   - rating -> string
   - type -> string
-  - bgimage -> string
+  - image -> string
 
 ### Modifications
 

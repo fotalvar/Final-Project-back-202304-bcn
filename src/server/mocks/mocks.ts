@@ -22,7 +22,7 @@ export const mockedTeam: TeamsStructure[] = [
     character4: "6471d17647109a6b3fc62e08",
     rating: "S",
     type: "Fighters",
-    bgimage:
+    image:
       "https://cdn.shopify.com/s/files/1/0554/2664/6129/articles/All-Pyro-Characters-Ranked-in-Genshin-Impact.webp",
   },
   {
@@ -36,6 +36,6 @@ export const mockedTeam: TeamsStructure[] = [
     character4: "6471d17647109a6b3fc62e08",
     rating: "S",
     type: "Explorers",
-    bgimage: "https://i.blogs.es/1d5449/x720/840_560.jpeg",
+    image: "https://i.blogs.es/1d5449/x720/840_560.jpeg",
   },
 ];
