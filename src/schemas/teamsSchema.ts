@@ -33,7 +33,7 @@ const teamsSchema = new Schema({
     type: String,
     required: true,
   },
-  bgimage: {
+  image: {
     type: String,
     required: true,
   },

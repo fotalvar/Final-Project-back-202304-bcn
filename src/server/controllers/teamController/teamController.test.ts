@@ -24,6 +24,7 @@ describe("Given a getTeams controller", () => {
   describe("When it receives a response", () => {
     Team.find = jest.fn().mockReturnValue({
       limit: jest.fn().mockReturnThis(),
+      sort: jest.fn().mockReturnThis(),
       exec: jest.fn().mockResolvedValue(mockedTeam),
     });
     test("Then it should call the response's method status with 200", async () => {
@@ -61,6 +62,7 @@ describe("Given a getTeams controller", () => {
 
       Team.find = jest.fn().mockReturnValue({
         limit: jest.fn().mockReturnThis(),
+        sort: jest.fn().mockReturnThis(),
         exec: jest.fn().mockRejectedValue(expectedError),
       });
 
