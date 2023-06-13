@@ -1,48 +1,20 @@
-import { Schema, Types, model } from "mongoose";
+import { Joi } from "express-validation";
 
-const teamsSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  character1: {
-    type: String,
-    required: true,
-  },
-  character2: {
-    type: String,
-    required: true,
-  },
-  character3: {
-    type: String,
-    required: true,
-  },
-  character4: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  user: {
-    type: Types.ObjectId,
-    ref: "User",
-  },
-});
+import { type TeamCompleteStructure } from "../types";
 
-const Team = model("Team", teamsSchema, "teams");
-
-export default Team;
+export const addTeamSchema = {
+  body: Joi.object({
+    team: Joi.object<TeamCompleteStructure>({
+      name: Joi.string().required(),
+      description: Joi.string().required(),
+      character1: Joi.string().required(),
+      character2: Joi.string().required(),
+      character3: Joi.string().required(),
+      character4: Joi.string().required(),
+      rating: Joi.string().required(),
+      type: Joi.string().required(),
+      image: Joi.string().required(),
+      user: Joi.string().required(),
+    }),
+  }),
+};
