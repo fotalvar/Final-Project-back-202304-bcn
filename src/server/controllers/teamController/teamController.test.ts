@@ -1,4 +1,3 @@
-import Team from "../../../schemas/teamsSchema";
 import { type Request, type NextFunction, type Response } from "express";
 import { type CustomRequest } from "../../middlewares/authMiddlewares/types";
 import getTeams, { addTeam, deleteTeam } from "./teamController";
@@ -6,6 +5,7 @@ import { mockedTeam } from "../../mocks/mocks";
 import { correctResponse } from "../../../utils/responseUtils";
 import { Types } from "mongoose";
 import { type TeamStructureRequest } from "../../../types";
+import Team from "../../../database/models/Team";
 
 type CustomResponse = Pick<Response, "status" | "json">;
 

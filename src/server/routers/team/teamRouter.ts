@@ -5,6 +5,8 @@ import getTeams, {
   deleteTeam,
 } from "../../controllers/teamController/teamController.js";
 import path from "../../../paths.js";
+import { validate } from "express-validation";
+import { addTeamSchema } from "../../../schemas/teamsSchema.js";
 
 const teamRouter = Router();
 
@@ -12,6 +14,11 @@ teamRouter.get(path.root, auth, getTeams);
 
 teamRouter.delete(path.delete, auth, deleteTeam);
 
-teamRouter.post(path.add, auth, addTeam);
+teamRouter.post(
+  path.add,
+  validate(addTeamSchema, {}, { abortEarly: false }),
+  auth,
+  addTeam
+);
 
 export default teamRouter;

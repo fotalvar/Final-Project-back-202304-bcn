@@ -1,4 +1,5 @@
 import { type Request } from "express";
+import { type Types } from "mongoose";
 
 export interface PathStructure {
   root: string;
@@ -34,6 +35,19 @@ export interface TeamsStructure {
   image: string;
 }
 
+export interface TeamCompleteStructure {
+  id?: string;
+  name: string;
+  description: string;
+  character1: string;
+  character2: string;
+  character3: string;
+  character4: string;
+  rating: string;
+  type: string;
+  image: string;
+  user: Types.ObjectId | string;
+}
 export interface TeamStructureRequest extends Request {
   body: TeamsStructure;
   id: string;

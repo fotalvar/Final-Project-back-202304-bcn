@@ -1,10 +1,10 @@
 import { type NextFunction, type Request, type Response } from "express";
-import Team from "../../../schemas/teamsSchema.js";
 import { statusCode } from "../../../utils/responseUtils.js";
 import CustomError from "../../../CustomError/CustomError.js";
 import { type TeamStructureRequest } from "../../../types.js";
 import { Types } from "mongoose";
 import { type CustomRequest } from "../../middlewares/authMiddlewares/types.js";
+import Team from "../../../database/models/Team.js";
 
 const getTeams = async (
   req: CustomRequest,
