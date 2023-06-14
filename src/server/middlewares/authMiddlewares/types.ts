@@ -1,4 +1,5 @@
 import { type Request } from "express";
+import { type TeamsMockStructure } from "../../../types";
 
 export interface UserCredentials {
   username: string;
@@ -28,6 +29,9 @@ export interface CustomTestRequest extends Request {
 }
 
 export interface CustomParamsRequest extends Request {
-  user: string;
+  id: string;
   params: { teamsId: string };
+  body: TeamsMockStructure;
 }
+
+export interface CustomRequest2 extends Request {}
