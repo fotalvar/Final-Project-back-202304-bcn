@@ -17,7 +17,9 @@ const getTeams = async (
 
     const teams = await Team.find().sort({ _id: -1 }).limit(limitNumber).exec();
 
-    res.status(statusCode.ok).json({ teams });
+    const totalCount = await Team.where().countDocuments();
+
+    res.status(statusCode.ok).json({ teams, totalCount });
   } catch (error) {
     next(error);
   }
@@ -31,13 +33,6 @@ export const deleteTeam = async (
   const { id } = req.params;
 
   try {
-    const team = await Team.findById(id).exec();
-
-    if (!team) {
-      const deleteError = new CustomError(404, "Team not found");
-      throw deleteError;
-    }
-
     await Team.findByIdAndDelete(id).exec();
 
     res.status(statusCode.ok).json("Team deleted");
@@ -60,6 +55,28 @@ export const addTeam = async (
 
     res.status(201).json({ newTeam });
   } catch (error: unknown) {
+    next(error);
+  }
+};
+
+export const getTeamsById = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { teamId } = req.params;
+
+    const selectedTeam = await Team.findById(teamId).exec();
+
+    if (!selectedTeam) {
+      const error = new CustomError(404, "Team not found");
+
+      throw error;
+    }
+
+    res.status(200).json({ teamById: selectedTeam });
+  } catch (error) {
     next(error);
   }
 };
